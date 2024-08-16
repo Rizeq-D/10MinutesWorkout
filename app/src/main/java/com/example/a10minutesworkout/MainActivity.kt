@@ -1,47 +1,30 @@
 package com.example.a10minutesworkout
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.a10minutesworkout.ui.theme._10MinutesWorkoutTheme
+import com.example.a10minutesworkout.databinding.ActivityMainBinding
 
 class MainActivity : ComponentActivity() {
+
+    private var binding : ActivityMainBinding? =null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            _10MinutesWorkoutTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding?.root)
+
+        binding?.flStart?.setOnClickListener{
+            Toast.makeText(this@MainActivity,
+                "Here we will start the exercises.", Toast.LENGTH_LONG).show()
+
         }
+
     }
-}
+    override fun onDestroy() {
+        super.onDestroy()
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    _10MinutesWorkoutTheme {
-        Greeting("Android")
+        binding = null
     }
 }
