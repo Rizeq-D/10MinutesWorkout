@@ -53,6 +53,7 @@ android {
 dependencies {
 
     implementation (libs.androidx.constraintlayout)
+    implementation (libs.androidx.appcompat.v161)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

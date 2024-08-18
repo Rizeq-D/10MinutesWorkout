@@ -1,5 +1,6 @@
 package com.example.a10minutesworkout
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -16,6 +17,8 @@ class MainActivity : ComponentActivity() {
         setContentView(binding?.root)
 
         binding?.flStart?.setOnClickListener{
+            val intent = Intent(this@MainActivity, ExercisesActivity::class.java)
+            startActivity(intent)
             Toast.makeText(this@MainActivity,
                 "Here we will start the exercises.", Toast.LENGTH_LONG).show()
 
