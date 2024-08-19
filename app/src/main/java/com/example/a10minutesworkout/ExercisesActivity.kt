@@ -40,22 +40,37 @@ class ExercisesActivity : AppCompatActivity() {
 
             setupRestView()
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun setupRestView() {
+        binding?.flProgressBar?.visibility = View.VISIBLE
+        binding?.tvTitle?.visibility = View.VISIBLE
+        binding?.tvExerciseName?.visibility = View.INVISIBLE
+        binding?.ivImage?.visibility = View.INVISIBLE
+        binding?.flExerciseView?.visibility = View.INVISIBLE
             if (restTime != null) {
                 restTime?.cancel()
                 restProgress = 0
             }
         setRestProgressBar()
     }
+
     @SuppressLint("SetTextI18n")
     private fun setupExerciseView() {
         binding?.flProgressBar?.visibility = View.INVISIBLE
-        binding?.tvTitle?.text = "Exercise Name"
+        binding?.tvTitle?.visibility = View.VISIBLE
+        binding?.tvExerciseName?.visibility = View.VISIBLE
+        binding?.ivImage?.visibility = View.VISIBLE
         binding?.flExerciseView?.visibility = View.VISIBLE
         if (restTimeExercise != null) {
             restTimeExercise?.cancel()
             restProgressExercise = 0
         }
+
+        binding?.ivImage?.setImageResource(exerciseList!![currentExercisePosition]
+            .getImage())
+        binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition]
+            .getName()
+
         setExerciseProgressBar()
     }
     private fun setRestProgressBar() {
@@ -85,10 +100,15 @@ class ExercisesActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExercisesActivity,
-                    "the 30 sec are over, move to the rest view",
-                    Toast.LENGTH_LONG).show()
+                if (currentExercisePosition < exerciseList?.size!! -1) {
+                    setupRestView()
+                }else {
+                    Toast.makeText(
+                        this@ExercisesActivity,
+                        "the 30 sec are over, move to the rest view",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }.start()
     }
