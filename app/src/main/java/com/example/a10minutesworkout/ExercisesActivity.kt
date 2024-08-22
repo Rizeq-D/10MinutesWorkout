@@ -1,6 +1,8 @@
 package com.example.a10minutesworkout
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
@@ -25,6 +27,7 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1
 
     private var tts: TextToSpeech? = null
+    private var player : MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,8 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-            setupRestView()
+        playStartSound()
+        setupRestView()
     }
     @SuppressLint("SuspiciousIndentation")
     private fun setupRestView() {
@@ -91,7 +95,7 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
 
-        restTime = object : CountDownTimer(1000, 1000) {
+        restTime = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBar?.progress = 10 - restProgress
@@ -107,7 +111,7 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar() {
         binding?.progressBarExercise?.progress = restProgressExercise
 
-        restTimeExercise = object : CountDownTimer(1000, 1000) {
+        restTimeExercise = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgressExercise++
                 binding?.progressBarExercise?.progress = 30 - restProgressExercise
@@ -142,6 +146,11 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts?.stop()
             tts?.shutdown()
         }
+        if (player != null){
+            player!!.stop()
+            player?.release()
+            player = null
+        }
         binding = null
     }
 
@@ -158,7 +167,19 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun speakOut(text: String) {
         tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
+    private fun playStartSound() {
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://com.example.a10minutesworkout/" + R.raw.start_engine)
+            player = MediaPlayer.create(applicationContext, soundURI)
+            player?.isLooping = false
+            player?.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }
+
 
 
 
