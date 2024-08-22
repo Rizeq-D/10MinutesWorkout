@@ -75,7 +75,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Photographer**: Martin Martz
 - **Published on**: July 25, 2023
 - **License**: Free to use under the Unsplash License
-- **Link**: [Unsplash Image]([https://unsplash.com/photos/xyz](https://unsplash.com/photos/a-dark-green-background-with-a-curved-curve-npdGyujDvaU))
+- **Link**: [Unsplash Image](https://unsplash.com/photos/a-dark-green-background-with-a-curved-curve-npdGyujDvaU)
 
 ## Sound
 
