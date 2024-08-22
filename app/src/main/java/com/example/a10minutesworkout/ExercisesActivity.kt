@@ -10,24 +10,27 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a10minutesworkout.databinding.ActivityExercisesBinding
 import java.util.Locale
 
-class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+class ExercisesActivity: AppCompatActivity(), TextToSpeech.OnInitListener {
 
-    private var binding : ActivityExercisesBinding? = null
+    private var binding: ActivityExercisesBinding? = null
 
-    private var restTime : CountDownTimer? = null
+    private var restTime: CountDownTimer? = null
     private var restProgress = 0
 
-    private var restTimeExercise : CountDownTimer? = null
+    private var restTimeExercise: CountDownTimer? = null
     private var restProgressExercise = 0
 
-    private var exerciseList : ArrayList<ExerciseModel>? = null
+    private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
 
     private var tts: TextToSpeech? = null
-    private var player : MediaPlayer? = null
+    private var player: MediaPlayer? = null
+
+    private var exerciseAdapter: ExerciseStatusAdapter? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,16 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         playStartSound()
         setupRestView()
+        setupExerciseRecyclerView()
     }
+
+    private fun setupExerciseRecyclerView() {
+        binding?.rvExerciseStatus?.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        exerciseAdapter = ExerciseStatusAdapter(exerciseList!!)
+        binding?.rvExerciseStatus?.adapter = exerciseAdapter
+    }
+
     @SuppressLint("SuspiciousIndentation")
     private fun setupRestView() {
         binding?.flProgressBar?.visibility = View.VISIBLE
@@ -102,8 +114,11 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvTimer?.text = (10 - restProgress).toString()
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
                 currentExercisePosition++
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                exerciseAdapter!!.notifyDataSetChanged()
                 setupExerciseView()
             }
         }.start()
@@ -118,7 +133,11 @@ class ExercisesActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvTimerExercise?.text = (30 - restProgressExercise).toString()
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
+                exerciseList!![currentExercisePosition].setIsSelected(false)
+                exerciseList!![currentExercisePosition].setIsCompleted(true)
+                exerciseAdapter!!.notifyDataSetChanged()
                 if (currentExercisePosition < exerciseList?.size!! -1) {
                     setupRestView()
                 }else {
