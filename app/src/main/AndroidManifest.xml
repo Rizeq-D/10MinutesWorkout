@@ -13,9 +13,13 @@
         android:theme="@style/Theme._10MinutesWorkout"
         tools:targetApi="31">
         <activity
+            android:name=".FinishActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".ExercisesActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

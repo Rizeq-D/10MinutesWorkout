@@ -16,15 +16,10 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-
         binding?.flStart?.setOnClickListener{
             val intent = Intent(this@MainActivity, ExercisesActivity::class.java)
             startActivity(intent)
-            Toast.makeText(this@MainActivity,
-                "Here we will start the exercises.", Toast.LENGTH_LONG).show()
-
         }
-
     }
     override fun onDestroy() {
         super.onDestroy()
