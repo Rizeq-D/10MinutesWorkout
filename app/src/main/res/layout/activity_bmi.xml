@@ -13,9 +13,47 @@
         android:layout_height="?android:attr/actionBarSize"
         android:theme="@style/ToolbarTheme"
         android:background="@color/DarkYellow"/>
+
+    <RadioGroup
+        android:id="@+id/rgUnits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_bmi_activity"
+        android:layout_margin="10dp"
+        android:background="@drawable/radio_group_tab_background"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbMetricUnits"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="0.50"
+            android:background="@drawable/units_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/metric_units"
+            android:textColor="@drawable/units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbUsUnits"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="0.50"
+            android:background="@drawable/units_tab_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/us_units"
+            android:textColor="@drawable/units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RadioGroup>
     
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@+id/toolbar_bmi_activity"
+        android:layout_below="@+id/rgUnits"
         android:id="@+id/tiMetricUnitWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +111,7 @@
             android:textColor="@color/Light_green"
             android:textStyle="italic|bold"
             android:textAllCaps="true"
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvBMIValue"
@@ -91,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:textColor="@color/Light_green"
             android:textStyle="italic|bold"
             tools:text="Beautiful" />
@@ -103,7 +141,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="25sp"
             tools:text="Beautiful" />
     </LinearLayout>
 
@@ -120,7 +158,6 @@
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
-
 
 </RelativeLayout>
 
