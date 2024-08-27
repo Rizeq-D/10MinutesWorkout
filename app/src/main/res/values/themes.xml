@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
-    <style name="Theme._10MinutesWorkout" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme._10MinutesWorkout" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
-
+    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="colorControlNormal">@color/Black</item>
 
+    </style>
+    <style name="Theme.BMIActivity" parent="Theme._10MinutesWorkout">
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

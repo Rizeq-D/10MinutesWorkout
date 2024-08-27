@@ -9,4 +9,10 @@
     <string name="are_you_sure_you_want_to_quit">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="_10_minutes_n_workout">10 MINUTES\n WORKOUT!</string>
+    <string name="BMI">BMI</string>
+    <string name="calculate">Calculate</string>
+    <string name="weight_in_kg">WEIGHT (in KG)</string>
+    <string name="height_in_cm">HEIGHT (in CM)</string>
+    <string name="your_bmi">YOUR BMI</string>
 </resources>

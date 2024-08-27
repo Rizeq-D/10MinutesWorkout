@@ -20,6 +20,10 @@ class MainActivity : ComponentActivity() {
             val intent = Intent(this@MainActivity, ExercisesActivity::class.java)
             startActivity(intent)
         }
+        binding?.flBMI?.setOnClickListener{
+            val intent = Intent(this, BMIActivity::class.java)
+            startActivity(intent)
+        }
     }
     override fun onDestroy() {
         super.onDestroy()
