@@ -10,6 +10,14 @@ import java.math.RoundingMode
 
 class BMIActivity : AppCompatActivity() {
 
+    companion object {
+        private const val METRIC_UNITS_VIEW = "METRIC_UNIT_VIEW"
+        private const val US_UNITS_VIEW = "US_UNIT_VIEW"
+    }
+
+    private var currentVisibleView: String =
+        METRIC_UNITS_VIEW
+
     private var binding: ActivityBmiBinding? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +36,17 @@ class BMIActivity : AppCompatActivity() {
 
         binding?.toolbarBmiActivity?.setNavigationOnClickListener{
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        makeVisibleMetricUnitsView()
+
+        binding?.rgUnits?.setOnCheckedChangeListener { _, checkedId: Int ->
+
+            if (checkedId == R.id.rbMetricUnits) {
+                makeVisibleMetricUnitsView()
+            } else {
+                makeVisibleUsUnitsView()
+            }
         }
 
         binding?.btnCalculateUnits?.setOnClickListener {
@@ -55,6 +74,33 @@ class BMIActivity : AppCompatActivity() {
             isValid = false
         }
         return isValid
+    }
+    private fun makeVisibleMetricUnitsView() {
+        currentVisibleView = METRIC_UNITS_VIEW
+        binding?.tiMetricUnitWeight?.visibility = View.VISIBLE
+        binding?.tiMetricUnitHeight?.visibility = View.VISIBLE
+        binding?.tilUsMetricUnitWeight?.visibility = View.GONE
+        binding?.tilMetricUsUnitHeightFeet?.visibility = View.GONE
+        binding?.tilMetricUsUnitHeightInch?.visibility = View.GONE
+
+        binding?.etMetricUnitHeight?.text!!.clear()
+        binding?.etMetricUnitWeight?.text!!.clear()
+
+        binding?.llDisplayBMIResult?.visibility = View.INVISIBLE
+    }
+    private fun makeVisibleUsUnitsView() {
+        currentVisibleView = US_UNITS_VIEW
+        binding?.tiMetricUnitHeight?.visibility = View.INVISIBLE
+        binding?.tiMetricUnitWeight?.visibility = View.INVISIBLE
+        binding?.tilUsMetricUnitWeight?.visibility = View.VISIBLE
+        binding?.tilMetricUsUnitHeightFeet?.visibility = View.VISIBLE
+        binding?.tilMetricUsUnitHeightInch?.visibility = View.VISIBLE
+
+        binding?.etUsMetricUnitWeight?.text!!.clear()
+        binding?.etUsMetricUnitHeightFeet?.text!!.clear()
+        binding?.etUsMetricUnitHeightInch?.text!!.clear()
+
+        binding?.llDisplayBMIResult?.visibility = View.INVISIBLE
     }
     private fun displayBMIResults(bmi: Float) {
 
@@ -110,6 +156,9 @@ class BMIActivity : AppCompatActivity() {
                     "We see that it will be great " +
                     "if you go to see a professional Nutritionist."
         }
+
+        binding?.llDisplayBMIResult?.visibility = View.VISIBLE
+
         val bmiValue =BigDecimal(bmi.toDouble())
             .setScale(2,RoundingMode.HALF_EVEN).toString()
 

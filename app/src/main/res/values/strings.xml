@@ -17,4 +17,7 @@
     <string name="your_bmi">YOUR BMI</string>
     <string name="us_units">US UNITS</string>
     <string name="metric_units">METRIC UNITS</string>
+    <string name="weight_in_pound">WEIGHT (in POUND)</string>
+    <string name="feet">Feet</string>
+    <string name="inch">Inch</string>
 </resources>
