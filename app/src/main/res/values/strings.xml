@@ -20,4 +20,5 @@
     <string name="weight_in_pound">WEIGHT (in POUND)</string>
     <string name="feet">Feet</string>
     <string name="inch">Inch</string>
+    <string name="history">History</string>
 </resources>
