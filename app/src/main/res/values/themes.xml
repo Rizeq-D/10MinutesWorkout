@@ -9,9 +9,13 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="colorControlNormal">@color/Black</item>
-
     </style>
+
     <style name="Theme.BMIActivity" parent="Theme._10MinutesWorkout">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.HistoryActivity" parent="Theme._10MinutesWorkout">
         <item name="android:windowFullscreen">true</item>
     </style>
 

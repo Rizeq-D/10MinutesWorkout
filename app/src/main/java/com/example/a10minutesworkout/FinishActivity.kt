@@ -1,8 +1,14 @@
 package com.example.a10minutesworkout
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.a10minutesworkout.databinding.ActivityFinishBinding
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class FinishActivity : AppCompatActivity() {
 
@@ -18,18 +24,37 @@ class FinishActivity : AppCompatActivity() {
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        binding?.toolbarFinishActivity?.setNavigationOnClickListener{
+        binding?.toolbarFinishActivity?.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        binding?.btnFinish?.setOnClickListener{
+        binding?.btnFinish?.setOnClickListener {
             finish()
         }
+
+        val dao = (application as WorkOutApp).db.historyDao()
+        addDateToDatabase(dao)
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
+
+    private fun addDateToDatabase(historyDao: HistoryDao) {
+
+        val c = Calendar.getInstance()
+        val dateTime = c.time
+        Log.e("Date : ", "" + dateTime)
+
+        val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault())
+        val date = sdf.format(dateTime)
+        Log.e("Formatted Date : ", "" + date)
+
+        lifecycleScope.launch {
+            historyDao.insert(HistoryEntity(date))
+            Log.e(
+                "Date : ",
+                "Added..."
+            )
+        }
     }
 }
+
 
 
 

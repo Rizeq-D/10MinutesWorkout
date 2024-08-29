@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoryActivity">
@@ -12,6 +12,42 @@
         android:id="@+id/toolbar_history_activity"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="#FFFFFF" />
+        android:background="@color/DarkYellow" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/toolbar_history_activity"
+        android:id="@+id/tvHistory"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="@string/exercise_completed"
+        android:textColor="@color/DarkYellow"
+        android:background="@color/Grass"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/tvHistory"
+        android:id="@+id/rvHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/toolbar_history_activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tvNoDataAvailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_data_available"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,6 @@ package com.example.a10minutesworkout
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.a10minutesworkout.databinding.ActivityMainBinding
 
